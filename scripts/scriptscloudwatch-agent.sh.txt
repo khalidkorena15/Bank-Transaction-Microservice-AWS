@@ -1,0 +1,40 @@
+#!/bin/bash
+# =========================================================
+# 🔐 REQUIRED AWS CONFIG (VERY IMPORTANT)
+#
+# This script WILL NOT WORK unless the EC2 instance
+# has the correct AWS configuration.
+#
+# 1️⃣ IAM ROLE (MANDATORY)
+# The EC2 instance MUST have an IAM Role attached with:
+#   - Policy: CloudWatchAgentServerPolicy
+#
+# Steps:
+# IAM → Roles → Create role
+# Trusted entity: EC2
+# Attach policy: CloudWatchAgentServerPolicy
+# Attach role to this EC2 instance
+#
+# Without this role:
+# ❌ Metrics will NOT appear in CloudWatch
+#
+# 2️⃣ NETWORK REQUIREMENTS
+# - EC2 must have outbound internet access
+#   (via NAT Gateway or NAT Instance)
+# - Required endpoints:
+#   monitoring.amazonaws.com
+#   logs.amazonaws.com
+#
+# 3️⃣ SUPPORTED OS
+# - Amazon Linux 2
+# - Ubuntu 20.04 / 22.04
+#
+# =========================================================
+#
+# Script Purpose:
+# Install and configure Amazon CloudWatch Agent
+# to collect CPU, Memory, and Disk metrics.
+#
+# Author: Khalid Korena
+# Project: Bank Transaction Microservice – Secure AWS Architecture
+# =========================================================

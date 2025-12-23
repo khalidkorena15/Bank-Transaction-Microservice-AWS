@@ -1,0 +1,44 @@
+#!/bin/bash
+# ============================================
+# NAT Instance Setup Script
+# Author: Khalid Korena
+# Purpose: Configure a Public EC2 as NAT Instance
+#
+# IMPORTANT AWS PREREQUISITES (MANUAL / AWS CLI):
+# 1. Disable Source/Destination Check on this EC2
+#    aws ec2 modify-instance-attribute \
+#      --instance-id <INSTANCE_ID> \
+#      --source-dest-check "{\"Value\": false}"
+#
+# 2. Private Subnet Route Table must include:
+#    Destination: 0.0.0.0/0
+#    Target: This NAT EC2 Instance ID
+#
+# This script configures ONLY the OS-level NAT.
+# ============================================
+
+set -e
+
+echo "[1/6] Enabling IP forwarding..."
+sudo sysctl -w net.ipv4.ip_forward=1
+sudo sed -i 's/^#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/' /etc/sysctl.conf
+
+echo "[2/6] Flushing existing NAT rules..."
+sudo iptables -t nat -F
+
+echo "[3/6] Adding MASQUERADE rule..."
+sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+
+echo "[4/6] Allowing forward traffic..."
+sudo iptables -A FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
+sudo iptables -A FORWARD -j ACCEPT
+
+echo "[5/6] Saving iptables rules..."
+sudo iptables-save | sudo tee /etc/iptables.rules > /dev/null
+
+echo "[6/6] Validation checks:"
+sysctl net.ipv4.ip_forward
+sudo iptables -t nat -L -n -v
+
+echo "✅ NAT Instance OS configuration completed."
+echo "⚠️ Ensure AWS Source/Dest Check is DISABLED and route tables are configured."

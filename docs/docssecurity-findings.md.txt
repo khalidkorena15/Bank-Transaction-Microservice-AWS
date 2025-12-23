@@ -1,0 +1,16 @@
+# 🔐 Security Findings & Remediation
+
+## Tools Used
+- Prowler
+- AWS CloudWatch
+- Amazon GuardDuty
+
+## Key Findings
+- Root account MFA enforcement
+- Public security group exposure
+- High-risk open ports
+
+## Remediation Actions
+- Enabled root account MFA
+- Restricted security group rules
+- Removed public access from private workloads
