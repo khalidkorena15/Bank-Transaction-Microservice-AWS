@@ -418,11 +418,3 @@ Architecture aligned with the AWS Well‑Architected Framework – Security Pill
 
 
 
-
-
-💬 I’d love to hear feedback or suggestions for further improvement, especially around scalability, automation, or additional security hardening.
-
-
-
-\#AWS #CloudSecurity #DevOps #CyberSecurity #EC2 #VPC #IAM #Prowler #GuardDuty #CloudWatch #Portfolio
-
