@@ -416,3 +416,111 @@ Automated security posture assessment with Prowler
 
 Architecture aligned with the AWS Well‑Architected Framework – Security Pillar.
 
+---
+
+
+
+\## 🔐 Security Notes
+
+
+
+This project follows security‑first principles while staying within AWS Free Tier limits.
+
+
+
+\### 🚫 No Hard‑Coded Secrets
+
+❌ Do NOT store:
+
+\- AWS access keys
+
+\- Database passwords
+
+\- Private keys
+
+\- Tokens
+
+
+
+Instead use:
+
+✔ AWS Systems Manager (SSM Parameter Store)
+
+✔ Environment variables
+
+
+
+---
+
+
+
+\### 🌍 Limited Network Exposure
+
+\- Public EC2 = Bastion / Jump Host ONLY
+
+\- Private EC2 = No public IP
+
+\- Database runs only inside the private EC2
+
+
+
+No one can access the private EC2 directly from the internet.
+
+
+
+---
+
+
+
+\### 🛡 Monitoring \& Threat Detection
+
+✔ Amazon CloudWatch — metrics + alarms  
+
+✔ Amazon GuardDuty — suspicious activity alerts  
+
+✔ Prowler — security posture scanning
+
+
+
+CloudWatch alarm:
+
+👉 Triggers email when CPU reaches \*\*9% or above\*\*
+
+👉 Uses SNS topic for notifications
+
+
+
+---
+
+
+
+\### 🔑 SSH Best Practices
+
+✔ Only connect using SSH keys  
+
+✔ Disable password login  
+
+✔ Allow SSH only from trusted IPs
+
+
+
+---
+
+
+
+\### ⚠️ Disclaimer
+
+This architecture is for \*\*learning and portfolio\*\* purposes.
+
+Production workloads require:
+
+\- Multi‑AZ redundancy
+
+\- Managed database (Amazon RDS)
+
+\- Load balancer + HTTPS
+
+\- Automated backups
+
+
+
