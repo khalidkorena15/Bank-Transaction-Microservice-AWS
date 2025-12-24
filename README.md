@@ -12,8 +12,6 @@ The solution is designed to isolate sensitive workloads, enforce network segment
 
 🏗️ Architecture Design
 
-!\[Project Architecture](screenshots/Secure AWS Banking Microservice Architecture.png)
-
 
 
 🌐 Networking (VPC \& Subnets)
