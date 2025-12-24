@@ -415,6 +415,28 @@ Automated security posture assessment with Prowler
 
 
 Architecture aligned with the AWS Well‑Architected Framework – Security Pillar.
+📌 CloudWatch Alarm — Load Test Scenario
+I used wrk from my Kali VM to simulate heavy traffic:
+
+wrk -t2 -c5000 -d120s http://<PUBLIC-EC2-IP>
+The CPU on the EC2 instance increased to 9%
+
+The CloudWatch alarm was triggered
+
+An email notification was sent through SNS
+
+After the spike, the instance protected itself
+
+When I tested again, I received:
+
+connection refused
+
+This demonstrates:
+
+✔ Monitoring works
+✔ Alerts are delivered
+✔ The instance limits unsafe traffic
+✔ The architecture responds safely under stress
 
 ---
 
